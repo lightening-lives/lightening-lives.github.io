@@ -12,10 +12,11 @@
     html {
       scroll-behavior: smooth;
     }
+    [x-cloak] { display: none !important; }
   </style>
 </head>
 
-<body>
+<body x-data="{ open: false }">
   <!-- Hero -->
   <div class="bg-white">
     <header class="absolute inset-x-0 top-0 z-50">
@@ -25,7 +26,7 @@
             <span class="sr-only">Lightening Lives</span>
           </a>
         </div>
-        <div class="flex lg:hidden">
+        <div class="flex lg:hidden" @click="open = true">
           <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
             <span class="sr-only">Open main menu</span>
             <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
@@ -34,14 +35,14 @@
           </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-          <a href="#" class="text-sm/6 font-semibold text-gray-900">Our Mission</a>
-          <a href="#" class="text-sm/6 font-semibold text-gray-900">Team</a>
-          <a href="#" class="text-sm/6 font-semibold text-gray-900">Join Our Team</a>
-          <a href="#" class="text-sm/6 font-semibold text-gray-900">Contact Us</a>
+          <a href="#mission" class="text-sm/6 font-semibold text-gray-900">Our Mission</a>
+          <a href="#team" class="text-sm/6 font-semibold text-gray-900">Team</a>
+          <a href="https://forms.gle/RaZR9mxmfwLu87dK7" class="text-sm/6 font-semibold text-gray-900" target="_blank">Join Our Team</a>
+          <a href="#contact" class="text-sm/6 font-semibold text-gray-900">Contact Us</a>
         </div>
       </nav>
       <!-- Mobile menu, show/hide based on menu open state. -->
-      <div class="lg:hidden" role="dialog" aria-modal="true">
+      <div class="lg:hidden" role="dialog" aria-modal="true" x-show="open">
         <!-- Background backdrop, show/hide based on slide-over state. -->
         <div class="fixed inset-0 z-50"></div>
         <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
@@ -49,7 +50,7 @@
             <a href="#" class="-m-1.5 p-1.5">
               <span class="sr-only">Lightening Lives</span>
             </a>
-            <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+            <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="open = false">
               <span class="sr-only">Close menu</span>
               <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -59,10 +60,10 @@
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
               <div class="space-y-2 py-6">
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Our Mission</a>
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Team</a>
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Join Our Team</a>
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Contact Us</a>
+                <a href="#mission" @click="open = false" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Our Mission</a>
+                <a href="#team" @click="open = false" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Team</a>
+                <a href="https://forms.gle/RaZR9mxmfwLu87dK7" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" @click="open = false" target="_blank">Join Our Team</a>
+                <a href="#contact" @click="open = false" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Contact Us</a>
               </div>
             </div>
           </div>
@@ -85,9 +86,9 @@
       <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
         <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
           <h1 class="mt-10 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl">Lightening Lives</h1>
-          <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
-            The company is built up around the principles of Golden circle that focusses on 'Why', 'What'
-            and 'How' in that order to achieve a mission. At Lightening Lives LLP, we are a skilled and
+          <p class="mt-8 text-lg text-pretty text-gray-500 sm:text-xl/8">
+            The company is built up around the principles of Golden circle that focusses on <span class="font-bold">Why</span>, <span class="font-bold">What</span>
+              and <span class="font-bold">How</span> in that order to achieve a mission. At Lightening Lives LLP, we are a skilled and
             dedicated team committed to developing a cost-effective, time-efficient, and robust
             diagnostic test for various genetic disorders and the current focus is on hemoglobinopathies
             and musculopathies. By utilizing simple, robust and affordable approaches, we aim to
@@ -95,7 +96,7 @@
             ultimately improving patient outcomes worldwide.            
           </p>
           <div class="mt-10 flex items-center gap-x-6">
-            <a href="#" class="text-sm/6 font-semibold text-gray-900">Learn more <span aria-hidden="true">→</span></a>
+            <a href="#featured" class="text-sm/6 font-semibold text-indigo-600">Learn more <span aria-hidden="true">→</span></a>
           </div>
         </div>
         <div class="mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow">
@@ -103,189 +104,222 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- Featured Section -->
-  <div class="bg-white py-24">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto lg:mx-0">
-        <h2 class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">The Golden Questions</h2>
-        <p class="mt-6 text-lg/8 text-gray-600">
-          Some leaders inspire rather than manipulate to motivate people, and they all share the same
-          approach. This approach follows a pattern I call &quot;The Golden Circle,&quot; which is the opposite of
-          how most people operate. The Golden Circle was inspired by the golden ratio, a
-          mathematical concept that has intrigued various fields for centuries. It offers a fresh
-          perspective on why certain leaders and organizations have exceptional influence.
-        </p>
-        <p class="mt-6 text-lg/8 text-gray-600">The Golden Circle has practical applications for inspiring others. Most organizations communicate from the outside in, starting with WHAT, then HOW, and
-          rarely focusing on WHY. But at Lightening Lives we follow Why, What and How in the
-          sequential order.</p>
-      </div>
-      <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-        <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-          <div class="flex flex-col">
-            <dt class="text-base/7 font-semibold text-gray-900">
-              <div class="mb-6 flex size-20">
-                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 103.34"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>why</title><path class="cls-1" d="M11.56,0h99.76a11.59,11.59,0,0,1,11.56,11.56V64.65a11.59,11.59,0,0,1-11.56,11.56l-24.64,0a19.6,19.6,0,0,0,.68-2.26h0A24.15,24.15,0,0,0,87.84,71h21.74a7.69,7.69,0,0,0,7.66-7.66V13.29a7.69,7.69,0,0,0-7.66-7.66H12.42c-4.21,0-6.79,3.45-6.79,7.66V63.35A7.69,7.69,0,0,0,13.29,71h2.37a1.94,1.94,0,0,1,1.81,2.07L17.3,83,29.89,71.58A1.94,1.94,0,0,1,31.26,71h4.41l0,.11a22.74,22.74,0,0,0,2.13,4.95H33.26L15.71,91.3A1.94,1.94,0,0,1,13,91.08a1.91,1.91,0,0,1-.46-1.39L11.72,76.2h-.16A11.58,11.58,0,0,1,0,64.65V11.56A11.59,11.59,0,0,1,11.56,0ZM31.27,45.92a6.13,6.13,0,0,1-2.22-.25,1.39,1.39,0,0,1-.75-.84L20.5,23.29c0-.44.84-1,2.53-1.55a15.29,15.29,0,0,1,5.1-.88c2.21,0,3.39.69,3.53,2.08l1.2,11.19h.49l1-11.19q.18-2.09,4.77-2.08a4.14,4.14,0,0,1,2.36.47,1.76,1.76,0,0,1,.67,1.26l1.17,11.54h.49l.92-11.19c.07-.68.87-1.2,2.42-1.55a20.07,20.07,0,0,1,4.58-.53,5.16,5.16,0,0,1,3.11.67,1.88,1.88,0,0,1,.83,1.41L48.11,44.83q-.39,1.1-5.23,1.09a4.9,4.9,0,0,1-1.94-.25,1.28,1.28,0,0,1-.67-.84l-1.84-6.15H38l-1.87,6.15c-.21.73-1.83,1.09-4.87,1.09Zm37.85-.85V35.26a25,25,0,0,0-.21-3.85c-.15-.8-.49-1.2-1-1.2s-.7.32-.7.95V45.07c0,.26-.69.47-2.05.62a38.56,38.56,0,0,1-4.2.23,11.21,11.21,0,0,1-2.72-.19c-.38-.13-.56-.35-.56-.66V20.61c0-.49.68-1,2-1.48A12.44,12.44,0,0,1,64,18.39c1.58,0,2.58.29,3,.88a1,1,0,0,1,.21.6v5.19l-.39,2.43h.25a4.18,4.18,0,0,1,1.55-1.3,9,9,0,0,1,4.31-1.06c2.23,0,3.75.71,4.54,2.14S78.65,31,78.65,34.2V45.07c0,.26-.69.47-2.07.62a38.56,38.56,0,0,1-4.2.23,11.11,11.11,0,0,1-2.7-.19c-.37-.13-.56-.35-.56-.66Zm24.29-1.45V41.54h-.28c-.12.12-.3.27-.53.46a6.63,6.63,0,0,1-1.66.74A8.63,8.63,0,0,1,88,43.2a7.33,7.33,0,0,1-2.83-.51,4.8,4.8,0,0,1-1.92-1.38A6.06,6.06,0,0,1,82.19,39a24.18,24.18,0,0,1-.67-6.49V27.64c0-.5.69-1,2.08-1.47A13.32,13.32,0,0,1,88,25.45c2,0,3.07.53,3.07,1.59v4.44c0,4.71.37,7.06,1.13,7.06.44,0,.67-.32.67-.95v-10q0-.75,2.22-1.47a15.37,15.37,0,0,1,4.77-.72c1.69,0,2.54.46,2.54,1.37v16.7q0,7.88-10.66,7.87c-3.74,0-6.29-.36-7.63-1.09-.59-.33-.88-.67-.88-1a10.15,10.15,0,0,1,.71-2.84c.47-1.33.9-2,1.3-2a7.2,7.2,0,0,1,1,.21,17.33,17.33,0,0,0,4.36.7A4.45,4.45,0,0,0,92.86,45a1.53,1.53,0,0,0,.55-1.35Z"/><path class="cls-2" d="M47.18,73c-1.25,0-2.33-1.48-3.25-4.46A29.11,29.11,0,0,1,42.56,60c0-.63.69-1.33,2.07-2.11a23.43,23.43,0,0,1,6.3-2.08,44.14,44.14,0,0,1,9.19-.9q19.23,0,19.23,13.4A13.16,13.16,0,0,1,77.78,75,10.47,10.47,0,0,1,74,79a17.92,17.92,0,0,1-8.24,2.54l-1.55.07A13.6,13.6,0,0,0,64.54,84a14.22,14.22,0,0,1,.33,2.81c0,.72-1.21,1.26-3.65,1.64a41.73,41.73,0,0,1-6.33.57c-2.73,0-4.41-.67-5.06-2s-1-4.17-1-8.51q0-1.55,5.76-2.28a10.52,10.52,0,0,0,3.92-1.41,3.27,3.27,0,0,0,1.78-2.94c0-1.26-1-1.88-3-1.88A15,15,0,0,0,51,71.5,19.78,19.78,0,0,1,47.18,73ZM57.7,91.27a16.41,16.41,0,0,1,7,1.17q2.42,1.19,2.42,4.86,0,6-9.39,6t-9.38-6q0-6,9.38-6Z"/></svg>
-              </div>
-              <!-- Why -->
-            </dt>
-            <dd class="mt-1 flex flex-auto flex-col text-base/7 text-gray-600">
-              <p class="flex-auto">Few can clearly explain why they do what they do. The WHY isn&#39;t about
-                making money—it&#39;s about the purpose, cause, or belief driving their actions. WHY is
-                the core motivation.</p>
-              <p class="mt-6">
-                <a href="#" class="text-sm/6 font-semibold text-indigo-600">Learn more <span aria-hidden="true">→</span></a>
-              </p>
-            </dd>
-          </div>
-          <div class="flex flex-col">
-            <dt class="text-base/7 font-semibold text-gray-900">
-              <div class="mb-6 flex size-20">
-                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 95.29"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>what</title><path class="cls-1" d="M10.66,0H112.22a10.68,10.68,0,0,1,10.66,10.66v49a10.69,10.69,0,0,1-10.66,10.66l-27.51,0a18.48,18.48,0,0,0,.63-2.08h0a22.31,22.31,0,0,0,.47-2.65h24.84a7.09,7.09,0,0,0,7.06-7.07V12.26a7.09,7.09,0,0,0-7.06-7.07H11.46c-3.89,0-6.27,3.18-6.27,7.07V58.42a7.1,7.1,0,0,0,7.07,7.07h2.18a1.79,1.79,0,0,1,1.67,1.91L16,76.56,27.57,66a1.73,1.73,0,0,1,1.26-.52h8.84l0,.09a21.16,21.16,0,0,0,2,4.58h-9l-16.19,14A1.79,1.79,0,0,1,12,84a1.85,1.85,0,0,1-.43-1.29L10.8,70.27h-.14A10.69,10.69,0,0,1,0,59.62v-49A10.68,10.68,0,0,1,10.66,0ZM25.09,42.35A5.87,5.87,0,0,1,23,42.12a1.29,1.29,0,0,1-.68-.78l-7.2-19.86c0-.41.78-.89,2.33-1.43a14.21,14.21,0,0,1,4.7-.81c2,0,3.13.63,3.26,1.92l1.11,10.31H27l.91-10.31c.11-1.29,1.58-1.92,4.4-1.92a3.81,3.81,0,0,1,2.18.43,1.64,1.64,0,0,1,.62,1.16l1.07,10.64h.46l.84-10.31c.07-.63.81-1.11,2.23-1.44A19.26,19.26,0,0,1,44,19.24a4.82,4.82,0,0,1,2.87.61,1.73,1.73,0,0,1,.76,1.31l-7,20.18c-.24.67-1.85,1-4.82,1A4.63,4.63,0,0,1,34,42.12a1.21,1.21,0,0,1-.62-.78L31.7,35.67h-.39l-1.73,5.67c-.19.67-1.69,1-4.49,1ZM60,41.56v-9A23,23,0,0,0,59.8,29c-.13-.74-.45-1.11-.95-1.11s-.65.29-.65.88V41.56c0,.24-.62.43-1.88.57a32.77,32.77,0,0,1-3.88.22,10.13,10.13,0,0,1-2.5-.18c-.35-.12-.52-.32-.52-.61V19c0-.46.63-.91,1.88-1.37a11.51,11.51,0,0,1,4-.68c1.46,0,2.38.27,2.77.81a.91.91,0,0,1,.2.55v4.79l-.36,2.24h.23a3.88,3.88,0,0,1,1.43-1.2,8.28,8.28,0,0,1,4-1c2.06,0,3.46.66,4.18,2s1.09,3.45,1.09,6.4v10c0,.24-.63.43-1.9.57a33,33,0,0,1-3.87.22,10,10,0,0,1-2.49-.18c-.35-.12-.53-.32-.53-.61Zm17.62,1.08A7.11,7.11,0,0,1,73,41.24a4.79,4.79,0,0,1-1.19-1.73,6.49,6.49,0,0,1-.5-2.67A4.76,4.76,0,0,1,72,34.18a5.4,5.4,0,0,1,1.77-1.76,10.28,10.28,0,0,1,2.44-1,18.33,18.33,0,0,1,4.66-.55h1.07A2,2,0,0,0,81,29a2.45,2.45,0,0,0-1.19-.23,5.67,5.67,0,0,0-1.92.42,11.42,11.42,0,0,0-1.87.87,2.71,2.71,0,0,1-1,.43c-.39,0-.92-.51-1.59-1.54a5.22,5.22,0,0,1-1-2.82c0-.28.4-.65,1.2-1.1A14.24,14.24,0,0,1,77,23.74a17.09,17.09,0,0,1,4.28-.57,16.37,16.37,0,0,1,3.6.35,10.15,10.15,0,0,1,2.47.83A4.82,4.82,0,0,1,89,25.65a8.83,8.83,0,0,1,1,1.46,5.55,5.55,0,0,1,.51,1.69,16.61,16.61,0,0,1,.22,3v9.79q0,.36-1.74.57a26.87,26.87,0,0,1-3.45.22,15.65,15.65,0,0,1-2.21-.1c-.34-.07-.54-.14-.6-.23a1.23,1.23,0,0,1-.17-.46l-.26-1.85h-.26q-.81,2.92-4.46,2.93ZM82,37.24V33.43a1.61,1.61,0,0,0-1.36.71,2.69,2.69,0,0,0-.52,1.63c0,1.43.32,2.15,1,2.15a1,1,0,0,0,.67-.21.62.62,0,0,0,.24-.47Zm24.23,4.81a4.22,4.22,0,0,1-2.67.56,18.16,18.16,0,0,1-3.45-.28,7.29,7.29,0,0,1-2.6-1.09C95.89,40.18,95.1,38,95.1,34.6V29.52H93.47c-.24,0-.44-.25-.62-.75a6.55,6.55,0,0,1-.26-2.05A6,6,0,0,1,93,24.43c.27-.67.62-1,1.06-1h1V19.49c0-.67.66-1.21,2-1.62a12.6,12.6,0,0,1,3.86-.62c2,0,3,.49,3,1.46v4.72h2.41c.56,0,.84.82.84,2.44a7.81,7.81,0,0,1-.37,2.63q-.37,1-1,1h-1.92v6a1.3,1.3,0,0,0,.75,1.25,3,3,0,0,0,1.32.37.66.66,0,0,1,.7.56,8.3,8.3,0,0,1,.13,1.66c0,1.45-.2,2.36-.59,2.73Z"/><path class="cls-2" d="M48.29,67.36q-1.73,0-3-4.11A26.88,26.88,0,0,1,44,55.37c0-.58.63-1.23,1.91-1.95a21.81,21.81,0,0,1,5.81-1.92,40.9,40.9,0,0,1,8.47-.83Q78,50.67,78,63a12.25,12.25,0,0,1-1.45,6.09A9.64,9.64,0,0,1,73,72.86a16.6,16.6,0,0,1-7.6,2.35L64,75.27a11.67,11.67,0,0,0,.31,2.16,13.47,13.47,0,0,1,.31,2.6c0,.66-1.12,1.16-3.37,1.51a38.75,38.75,0,0,1-5.84.53q-3.76,0-4.67-1.86t-.89-7.85q0-1.41,5.31-2.1A9.82,9.82,0,0,0,58.77,69a3,3,0,0,0,1.64-2.72c0-1.15-.93-1.73-2.79-1.73a13.86,13.86,0,0,0-5.84,1.43,19,19,0,0,1-3.49,1.42ZM58,84.17a15.13,15.13,0,0,1,6.43,1.08q2.23,1.08,2.23,4.48,0,5.56-8.66,5.56t-8.65-5.56q0-5.57,8.65-5.56Z"/></svg>
-              </div>
-              <!-- What -->
-            </dt>
-            <dd class="mt-1 flex flex-auto flex-col text-base/7 text-gray-600">
-              <p class="flex-auto">Every company or individual knows what they do, whether it&#39;s a product,
-                service, or job role. This is easy to identify.</p>
-              <p class="mt-6">
-                <a href="#" class="text-sm/6 font-semibold text-indigo-600">Learn more <span aria-hidden="true">→</span></a>
-              </p>
-            </dd>
-          </div>
-          <div class="flex flex-col">
-            <dt class="text-base/7 font-semibold text-gray-900">
-              <div class="mb-6 flex size-20">
-                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 103.34"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>how</title><path class="cls-1" d="M11.56,0h99.76a11.59,11.59,0,0,1,11.56,11.56V64.65a11.59,11.59,0,0,1-11.56,11.56l-24.64,0a19.6,19.6,0,0,0,.68-2.26h0A24.15,24.15,0,0,0,87.84,71h21.74a7.69,7.69,0,0,0,7.66-7.66V13.29a7.69,7.69,0,0,0-7.66-7.66H12.42c-4.21,0-6.79,3.45-6.79,7.66V63.35A7.69,7.69,0,0,0,13.29,71h2.37a1.94,1.94,0,0,1,1.81,2.07L17.3,83,29.89,71.58A1.94,1.94,0,0,1,31.26,71h4.41l0,.11a22.74,22.74,0,0,0,2.13,4.95H33.26L15.71,91.3A1.94,1.94,0,0,1,13,91.08a1.91,1.91,0,0,1-.46-1.39L11.72,76.2h-.16A11.58,11.58,0,0,1,0,64.65V11.56A11.59,11.59,0,0,1,11.56,0Zm19,44.9c0,.3-.71.55-2.14.74a32.35,32.35,0,0,1-4.3.28,9.29,9.29,0,0,1-2.79-.25.82.82,0,0,1-.62-.77V23.19c0-.59.68-1.13,2.05-1.61a13.31,13.31,0,0,1,4.45-.72c2.23,0,3.35.53,3.35,1.59v7.76H33.7v-7c0-.59.69-1.13,2.07-1.61a13.41,13.41,0,0,1,4.46-.72c2.21,0,3.32.53,3.32,1.59V44.9c0,.3-.72.55-2.15.74a32.83,32.83,0,0,1-4.31.28,9.17,9.17,0,0,1-2.77-.25.82.82,0,0,1-.62-.77V36.81H30.56V44.9Zm26.51,1.34a20.09,20.09,0,0,1-4.56-.46,9.3,9.3,0,0,1-3.45-1.63q-3.23-2.32-3.22-8.68c0-3.76,1.1-6.46,3.29-8.08a13,13,0,0,1,7.94-2.26,27.76,27.76,0,0,1,3.56.19,12.08,12.08,0,0,1,3,.83,6.46,6.46,0,0,1,2.47,1.73,8.45,8.45,0,0,1,1.54,3,15.44,15.44,0,0,1,.6,4.57q0,5.37-3,8.07a11.81,11.81,0,0,1-8.15,2.7Zm-1.24-6.89a3.59,3.59,0,0,0,.51,1.52,1.13,1.13,0,0,0,1.42,0,3.39,3.39,0,0,0,.49-1.52,18.66,18.66,0,0,0,.23-3.19c0-1.28,0-2.27-.09-3a13.75,13.75,0,0,0-.21-1.61,2.34,2.34,0,0,0-.34-.88.9.9,0,0,0-.75-.46,1.05,1.05,0,0,0-.73.26,3.53,3.53,0,0,0-.53,1.55,21.27,21.27,0,0,0-.24,3.66,20.8,20.8,0,0,0,.24,3.63Zm41.34,5.72c-.31.57-1.9.85-4.79.85s-4.38-.28-4.5-.85l-1.2-6.42h-.49l-1.13,6.42q-.11.85-6.18.85a8.2,8.2,0,0,1-2.24-.19,1.26,1.26,0,0,1-.76-.66q-6.55-16.12-6.56-17c0-.56.85-1.14,2.56-1.74a14.76,14.76,0,0,1,4.92-.9c2,0,3.07.54,3.14,1.62l1.2,9.67h.43l.42-7.8c0-.59.62-1.1,1.8-1.55a9.89,9.89,0,0,1,3.56-.67,6.37,6.37,0,0,1,2.71.44q.9.43.93,1.08l.39,8.5h.39l1.16-9.07c.07-.56.87-1.08,2.38-1.53a14.11,14.11,0,0,1,4-.69,6.18,6.18,0,0,1,2.72.49c1.08.52,1.62,1.13,1.62,1.84q0,.11-3.19,8.61t-3.3,8.68Z"/><path class="cls-2" d="M47.18,73c-1.25,0-2.33-1.48-3.25-4.46A29.11,29.11,0,0,1,42.56,60c0-.63.69-1.33,2.07-2.11a23.43,23.43,0,0,1,6.3-2.08,44.14,44.14,0,0,1,9.19-.9q19.23,0,19.23,13.4A13.16,13.16,0,0,1,77.78,75,10.47,10.47,0,0,1,74,79a17.92,17.92,0,0,1-8.24,2.54l-1.55.07A13.6,13.6,0,0,0,64.54,84a14.22,14.22,0,0,1,.33,2.81c0,.72-1.21,1.26-3.65,1.64a41.73,41.73,0,0,1-6.33.57c-2.73,0-4.41-.67-5.06-2s-1-4.17-1-8.51q0-1.55,5.76-2.28a10.52,10.52,0,0,0,3.92-1.41,3.27,3.27,0,0,0,1.78-2.94c0-1.26-1-1.88-3-1.88A15,15,0,0,0,51,71.5,19.78,19.78,0,0,1,47.18,73ZM57.7,91.27a16.41,16.41,0,0,1,7,1.17q2.42,1.19,2.42,4.86,0,6-9.39,6t-9.38-6q0-6,9.38-6Z"/></svg>              
-              </div>
-              <!-- How -->
-            </dt>
-            <dd class="mt-1 flex flex-auto flex-col text-base/7 text-gray-600">
-              <p class="flex-auto">Some people or organizations understand how they do what they do—this
-                could be a unique process or selling point, but it&#39;s not as obvious as WHAT.</p>
-              <p class="mt-6">
-                <a href="#" class="text-sm/6 font-semibold text-indigo-600">Learn more <span aria-hidden="true">→</span></a>
-              </p>
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-  </div>
-  <!-- Why, what and How -->
-  <div class="bg-white py-24 sm:py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="">
-        <h2 class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Here is our Why, What and How</h2>
-        <!-- <p class="mt-2 text-lg/8 text-gray-600">Most organizations communicate from the outside in, starting with WHAT, then HOW, and rarely focusing on WHY. But at Lightening Lives we follow Why, What and How in the sequential order.</p> -->
-        <div class="mt-16 space-y-12 lg:mt-20 lg:space-y-12">
-          <div class="relative isolate flex flex-col gap-12 lg:flex-row">
-            <div class="relative aspect-video sm:aspect-2/1 lg:aspect-square lg:w-24 lg:shrink-0">
-              <svg class="absolute inset-0 size-full rounded-2xl object-cover" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 103.34"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>why</title><path class="cls-1" d="M11.56,0h99.76a11.59,11.59,0,0,1,11.56,11.56V64.65a11.59,11.59,0,0,1-11.56,11.56l-24.64,0a19.6,19.6,0,0,0,.68-2.26h0A24.15,24.15,0,0,0,87.84,71h21.74a7.69,7.69,0,0,0,7.66-7.66V13.29a7.69,7.69,0,0,0-7.66-7.66H12.42c-4.21,0-6.79,3.45-6.79,7.66V63.35A7.69,7.69,0,0,0,13.29,71h2.37a1.94,1.94,0,0,1,1.81,2.07L17.3,83,29.89,71.58A1.94,1.94,0,0,1,31.26,71h4.41l0,.11a22.74,22.74,0,0,0,2.13,4.95H33.26L15.71,91.3A1.94,1.94,0,0,1,13,91.08a1.91,1.91,0,0,1-.46-1.39L11.72,76.2h-.16A11.58,11.58,0,0,1,0,64.65V11.56A11.59,11.59,0,0,1,11.56,0ZM31.27,45.92a6.13,6.13,0,0,1-2.22-.25,1.39,1.39,0,0,1-.75-.84L20.5,23.29c0-.44.84-1,2.53-1.55a15.29,15.29,0,0,1,5.1-.88c2.21,0,3.39.69,3.53,2.08l1.2,11.19h.49l1-11.19q.18-2.09,4.77-2.08a4.14,4.14,0,0,1,2.36.47,1.76,1.76,0,0,1,.67,1.26l1.17,11.54h.49l.92-11.19c.07-.68.87-1.2,2.42-1.55a20.07,20.07,0,0,1,4.58-.53,5.16,5.16,0,0,1,3.11.67,1.88,1.88,0,0,1,.83,1.41L48.11,44.83q-.39,1.1-5.23,1.09a4.9,4.9,0,0,1-1.94-.25,1.28,1.28,0,0,1-.67-.84l-1.84-6.15H38l-1.87,6.15c-.21.73-1.83,1.09-4.87,1.09Zm37.85-.85V35.26a25,25,0,0,0-.21-3.85c-.15-.8-.49-1.2-1-1.2s-.7.32-.7.95V45.07c0,.26-.69.47-2.05.62a38.56,38.56,0,0,1-4.2.23,11.21,11.21,0,0,1-2.72-.19c-.38-.13-.56-.35-.56-.66V20.61c0-.49.68-1,2-1.48A12.44,12.44,0,0,1,64,18.39c1.58,0,2.58.29,3,.88a1,1,0,0,1,.21.6v5.19l-.39,2.43h.25a4.18,4.18,0,0,1,1.55-1.3,9,9,0,0,1,4.31-1.06c2.23,0,3.75.71,4.54,2.14S78.65,31,78.65,34.2V45.07c0,.26-.69.47-2.07.62a38.56,38.56,0,0,1-4.2.23,11.11,11.11,0,0,1-2.7-.19c-.37-.13-.56-.35-.56-.66Zm24.29-1.45V41.54h-.28c-.12.12-.3.27-.53.46a6.63,6.63,0,0,1-1.66.74A8.63,8.63,0,0,1,88,43.2a7.33,7.33,0,0,1-2.83-.51,4.8,4.8,0,0,1-1.92-1.38A6.06,6.06,0,0,1,82.19,39a24.18,24.18,0,0,1-.67-6.49V27.64c0-.5.69-1,2.08-1.47A13.32,13.32,0,0,1,88,25.45c2,0,3.07.53,3.07,1.59v4.44c0,4.71.37,7.06,1.13,7.06.44,0,.67-.32.67-.95v-10q0-.75,2.22-1.47a15.37,15.37,0,0,1,4.77-.72c1.69,0,2.54.46,2.54,1.37v16.7q0,7.88-10.66,7.87c-3.74,0-6.29-.36-7.63-1.09-.59-.33-.88-.67-.88-1a10.15,10.15,0,0,1,.71-2.84c.47-1.33.9-2,1.3-2a7.2,7.2,0,0,1,1,.21,17.33,17.33,0,0,0,4.36.7A4.45,4.45,0,0,0,92.86,45a1.53,1.53,0,0,0,.55-1.35Z"/><path class="cls-2" d="M47.18,73c-1.25,0-2.33-1.48-3.25-4.46A29.11,29.11,0,0,1,42.56,60c0-.63.69-1.33,2.07-2.11a23.43,23.43,0,0,1,6.3-2.08,44.14,44.14,0,0,1,9.19-.9q19.23,0,19.23,13.4A13.16,13.16,0,0,1,77.78,75,10.47,10.47,0,0,1,74,79a17.92,17.92,0,0,1-8.24,2.54l-1.55.07A13.6,13.6,0,0,0,64.54,84a14.22,14.22,0,0,1,.33,2.81c0,.72-1.21,1.26-3.65,1.64a41.73,41.73,0,0,1-6.33.57c-2.73,0-4.41-.67-5.06-2s-1-4.17-1-8.51q0-1.55,5.76-2.28a10.52,10.52,0,0,0,3.92-1.41,3.27,3.27,0,0,0,1.78-2.94c0-1.26-1-1.88-3-1.88A15,15,0,0,0,51,71.5,19.78,19.78,0,0,1,47.18,73ZM57.7,91.27a16.41,16.41,0,0,1,7,1.17q2.42,1.19,2.42,4.86,0,6-9.39,6t-9.38-6q0-6,9.38-6Z"/></svg>              
-            </div>
-            <div>
-              <div class="group relative">
-                <h3 class="mt-3 text-2xl/6 font-semibold text-gray-900">
-                  Why We Started Lightening Lives
-                </h3>
-                <p class="mt-5 text-lg/8 text-gray-600 hover:text-gray-600">
-                  After over 25 years of experience in the diagnostics field and building strong networks with
-                  clinicians, national health ministers, NGOs, academics, and companies, we felt a deep
-                  responsibility to give back to all the sections of the society. We realized that the most
-                  underserved and vulnerable populations, particularly those from economically weaker
-                  sections, are often the ones who need affordable diagnostic services the most. These
-                  communities, despite being the most in need, are frequently overlooked when it comes to
-                  vital healthcare.
+    <!-- Featured Section -->
+    <div class="bg-gray-50 py-24" id="featured">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto lg:mx-0">
+          <h2 class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">The Golden Questions</h2>
+          <p class="mt-6 text-lg/8 text-gray-600">
+            Some leaders inspire rather than manipulate to motivate people, and they all share the same
+            approach. This approach follows a pattern I call <span class="font-bold">The Golden Circle</span>, which is the opposite of
+            how most people operate. The Golden Circle was inspired by the golden ratio, a
+            mathematical concept that has intrigued various fields for centuries. It offers a fresh
+            perspective on why certain leaders and organizations have exceptional influence.
+          </p>
+          <p class="mt-6 text-lg/8 text-gray-600">The Golden Circle has practical applications for inspiring others. Most organizations communicate from the outside in, starting with WHAT, then HOW, and
+            rarely focusing on WHY. But at Lightening Lives we follow Why, What and How in the
+            sequential order.</p>
+        </div>
+        <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+          <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+            <div class="flex flex-col">
+              <dt class="text-base/7 font-semibold text-gray-900">
+                <div class="mb-6 flex size-20">
+                  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 103.34"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>why</title><path class="cls-1" d="M11.56,0h99.76a11.59,11.59,0,0,1,11.56,11.56V64.65a11.59,11.59,0,0,1-11.56,11.56l-24.64,0a19.6,19.6,0,0,0,.68-2.26h0A24.15,24.15,0,0,0,87.84,71h21.74a7.69,7.69,0,0,0,7.66-7.66V13.29a7.69,7.69,0,0,0-7.66-7.66H12.42c-4.21,0-6.79,3.45-6.79,7.66V63.35A7.69,7.69,0,0,0,13.29,71h2.37a1.94,1.94,0,0,1,1.81,2.07L17.3,83,29.89,71.58A1.94,1.94,0,0,1,31.26,71h4.41l0,.11a22.74,22.74,0,0,0,2.13,4.95H33.26L15.71,91.3A1.94,1.94,0,0,1,13,91.08a1.91,1.91,0,0,1-.46-1.39L11.72,76.2h-.16A11.58,11.58,0,0,1,0,64.65V11.56A11.59,11.59,0,0,1,11.56,0ZM31.27,45.92a6.13,6.13,0,0,1-2.22-.25,1.39,1.39,0,0,1-.75-.84L20.5,23.29c0-.44.84-1,2.53-1.55a15.29,15.29,0,0,1,5.1-.88c2.21,0,3.39.69,3.53,2.08l1.2,11.19h.49l1-11.19q.18-2.09,4.77-2.08a4.14,4.14,0,0,1,2.36.47,1.76,1.76,0,0,1,.67,1.26l1.17,11.54h.49l.92-11.19c.07-.68.87-1.2,2.42-1.55a20.07,20.07,0,0,1,4.58-.53,5.16,5.16,0,0,1,3.11.67,1.88,1.88,0,0,1,.83,1.41L48.11,44.83q-.39,1.1-5.23,1.09a4.9,4.9,0,0,1-1.94-.25,1.28,1.28,0,0,1-.67-.84l-1.84-6.15H38l-1.87,6.15c-.21.73-1.83,1.09-4.87,1.09Zm37.85-.85V35.26a25,25,0,0,0-.21-3.85c-.15-.8-.49-1.2-1-1.2s-.7.32-.7.95V45.07c0,.26-.69.47-2.05.62a38.56,38.56,0,0,1-4.2.23,11.21,11.21,0,0,1-2.72-.19c-.38-.13-.56-.35-.56-.66V20.61c0-.49.68-1,2-1.48A12.44,12.44,0,0,1,64,18.39c1.58,0,2.58.29,3,.88a1,1,0,0,1,.21.6v5.19l-.39,2.43h.25a4.18,4.18,0,0,1,1.55-1.3,9,9,0,0,1,4.31-1.06c2.23,0,3.75.71,4.54,2.14S78.65,31,78.65,34.2V45.07c0,.26-.69.47-2.07.62a38.56,38.56,0,0,1-4.2.23,11.11,11.11,0,0,1-2.7-.19c-.37-.13-.56-.35-.56-.66Zm24.29-1.45V41.54h-.28c-.12.12-.3.27-.53.46a6.63,6.63,0,0,1-1.66.74A8.63,8.63,0,0,1,88,43.2a7.33,7.33,0,0,1-2.83-.51,4.8,4.8,0,0,1-1.92-1.38A6.06,6.06,0,0,1,82.19,39a24.18,24.18,0,0,1-.67-6.49V27.64c0-.5.69-1,2.08-1.47A13.32,13.32,0,0,1,88,25.45c2,0,3.07.53,3.07,1.59v4.44c0,4.71.37,7.06,1.13,7.06.44,0,.67-.32.67-.95v-10q0-.75,2.22-1.47a15.37,15.37,0,0,1,4.77-.72c1.69,0,2.54.46,2.54,1.37v16.7q0,7.88-10.66,7.87c-3.74,0-6.29-.36-7.63-1.09-.59-.33-.88-.67-.88-1a10.15,10.15,0,0,1,.71-2.84c.47-1.33.9-2,1.3-2a7.2,7.2,0,0,1,1,.21,17.33,17.33,0,0,0,4.36.7A4.45,4.45,0,0,0,92.86,45a1.53,1.53,0,0,0,.55-1.35Z"/><path class="cls-2" d="M47.18,73c-1.25,0-2.33-1.48-3.25-4.46A29.11,29.11,0,0,1,42.56,60c0-.63.69-1.33,2.07-2.11a23.43,23.43,0,0,1,6.3-2.08,44.14,44.14,0,0,1,9.19-.9q19.23,0,19.23,13.4A13.16,13.16,0,0,1,77.78,75,10.47,10.47,0,0,1,74,79a17.92,17.92,0,0,1-8.24,2.54l-1.55.07A13.6,13.6,0,0,0,64.54,84a14.22,14.22,0,0,1,.33,2.81c0,.72-1.21,1.26-3.65,1.64a41.73,41.73,0,0,1-6.33.57c-2.73,0-4.41-.67-5.06-2s-1-4.17-1-8.51q0-1.55,5.76-2.28a10.52,10.52,0,0,0,3.92-1.41,3.27,3.27,0,0,0,1.78-2.94c0-1.26-1-1.88-3-1.88A15,15,0,0,0,51,71.5,19.78,19.78,0,0,1,47.18,73ZM57.7,91.27a16.41,16.41,0,0,1,7,1.17q2.42,1.19,2.42,4.86,0,6-9.39,6t-9.38-6q0-6,9.38-6Z"/></svg>
+                </div>
+                <!-- Why -->
+              </dt>
+              <dd class="mt-1 flex flex-auto flex-col text-base/7 text-gray-600">
+                <p class="flex-auto">Few can clearly explain why they do what they do. The WHY isn&#39;t about
+                  making money—it&#39;s about the purpose, cause, or belief driving their actions. WHY is
+                  the core motivation.</p>
+                <p class="mt-6">
+                  <a href="#mission" class="text-sm/6 font-semibold text-indigo-600">Learn more <span aria-hidden="true">→</span></a>
                 </p>
-              </div>
+              </dd>
             </div>
-          </div>
-          <div class="relative isolate flex flex-col gap-12 lg:flex-row">
-            <div class="relative aspect-video sm:aspect-2/1 lg:aspect-square lg:w-24 lg:shrink-0">
-              <svg class="absolute inset-0 size-full rounded-2xl object-cover" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 95.29"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>what</title><path class="cls-1" d="M10.66,0H112.22a10.68,10.68,0,0,1,10.66,10.66v49a10.69,10.69,0,0,1-10.66,10.66l-27.51,0a18.48,18.48,0,0,0,.63-2.08h0a22.31,22.31,0,0,0,.47-2.65h24.84a7.09,7.09,0,0,0,7.06-7.07V12.26a7.09,7.09,0,0,0-7.06-7.07H11.46c-3.89,0-6.27,3.18-6.27,7.07V58.42a7.1,7.1,0,0,0,7.07,7.07h2.18a1.79,1.79,0,0,1,1.67,1.91L16,76.56,27.57,66a1.73,1.73,0,0,1,1.26-.52h8.84l0,.09a21.16,21.16,0,0,0,2,4.58h-9l-16.19,14A1.79,1.79,0,0,1,12,84a1.85,1.85,0,0,1-.43-1.29L10.8,70.27h-.14A10.69,10.69,0,0,1,0,59.62v-49A10.68,10.68,0,0,1,10.66,0ZM25.09,42.35A5.87,5.87,0,0,1,23,42.12a1.29,1.29,0,0,1-.68-.78l-7.2-19.86c0-.41.78-.89,2.33-1.43a14.21,14.21,0,0,1,4.7-.81c2,0,3.13.63,3.26,1.92l1.11,10.31H27l.91-10.31c.11-1.29,1.58-1.92,4.4-1.92a3.81,3.81,0,0,1,2.18.43,1.64,1.64,0,0,1,.62,1.16l1.07,10.64h.46l.84-10.31c.07-.63.81-1.11,2.23-1.44A19.26,19.26,0,0,1,44,19.24a4.82,4.82,0,0,1,2.87.61,1.73,1.73,0,0,1,.76,1.31l-7,20.18c-.24.67-1.85,1-4.82,1A4.63,4.63,0,0,1,34,42.12a1.21,1.21,0,0,1-.62-.78L31.7,35.67h-.39l-1.73,5.67c-.19.67-1.69,1-4.49,1ZM60,41.56v-9A23,23,0,0,0,59.8,29c-.13-.74-.45-1.11-.95-1.11s-.65.29-.65.88V41.56c0,.24-.62.43-1.88.57a32.77,32.77,0,0,1-3.88.22,10.13,10.13,0,0,1-2.5-.18c-.35-.12-.52-.32-.52-.61V19c0-.46.63-.91,1.88-1.37a11.51,11.51,0,0,1,4-.68c1.46,0,2.38.27,2.77.81a.91.91,0,0,1,.2.55v4.79l-.36,2.24h.23a3.88,3.88,0,0,1,1.43-1.2,8.28,8.28,0,0,1,4-1c2.06,0,3.46.66,4.18,2s1.09,3.45,1.09,6.4v10c0,.24-.63.43-1.9.57a33,33,0,0,1-3.87.22,10,10,0,0,1-2.49-.18c-.35-.12-.53-.32-.53-.61Zm17.62,1.08A7.11,7.11,0,0,1,73,41.24a4.79,4.79,0,0,1-1.19-1.73,6.49,6.49,0,0,1-.5-2.67A4.76,4.76,0,0,1,72,34.18a5.4,5.4,0,0,1,1.77-1.76,10.28,10.28,0,0,1,2.44-1,18.33,18.33,0,0,1,4.66-.55h1.07A2,2,0,0,0,81,29a2.45,2.45,0,0,0-1.19-.23,5.67,5.67,0,0,0-1.92.42,11.42,11.42,0,0,0-1.87.87,2.71,2.71,0,0,1-1,.43c-.39,0-.92-.51-1.59-1.54a5.22,5.22,0,0,1-1-2.82c0-.28.4-.65,1.2-1.1A14.24,14.24,0,0,1,77,23.74a17.09,17.09,0,0,1,4.28-.57,16.37,16.37,0,0,1,3.6.35,10.15,10.15,0,0,1,2.47.83A4.82,4.82,0,0,1,89,25.65a8.83,8.83,0,0,1,1,1.46,5.55,5.55,0,0,1,.51,1.69,16.61,16.61,0,0,1,.22,3v9.79q0,.36-1.74.57a26.87,26.87,0,0,1-3.45.22,15.65,15.65,0,0,1-2.21-.1c-.34-.07-.54-.14-.6-.23a1.23,1.23,0,0,1-.17-.46l-.26-1.85h-.26q-.81,2.92-4.46,2.93ZM82,37.24V33.43a1.61,1.61,0,0,0-1.36.71,2.69,2.69,0,0,0-.52,1.63c0,1.43.32,2.15,1,2.15a1,1,0,0,0,.67-.21.62.62,0,0,0,.24-.47Zm24.23,4.81a4.22,4.22,0,0,1-2.67.56,18.16,18.16,0,0,1-3.45-.28,7.29,7.29,0,0,1-2.6-1.09C95.89,40.18,95.1,38,95.1,34.6V29.52H93.47c-.24,0-.44-.25-.62-.75a6.55,6.55,0,0,1-.26-2.05A6,6,0,0,1,93,24.43c.27-.67.62-1,1.06-1h1V19.49c0-.67.66-1.21,2-1.62a12.6,12.6,0,0,1,3.86-.62c2,0,3,.49,3,1.46v4.72h2.41c.56,0,.84.82.84,2.44a7.81,7.81,0,0,1-.37,2.63q-.37,1-1,1h-1.92v6a1.3,1.3,0,0,0,.75,1.25,3,3,0,0,0,1.32.37.66.66,0,0,1,.7.56,8.3,8.3,0,0,1,.13,1.66c0,1.45-.2,2.36-.59,2.73Z"/><path class="cls-2" d="M48.29,67.36q-1.73,0-3-4.11A26.88,26.88,0,0,1,44,55.37c0-.58.63-1.23,1.91-1.95a21.81,21.81,0,0,1,5.81-1.92,40.9,40.9,0,0,1,8.47-.83Q78,50.67,78,63a12.25,12.25,0,0,1-1.45,6.09A9.64,9.64,0,0,1,73,72.86a16.6,16.6,0,0,1-7.6,2.35L64,75.27a11.67,11.67,0,0,0,.31,2.16,13.47,13.47,0,0,1,.31,2.6c0,.66-1.12,1.16-3.37,1.51a38.75,38.75,0,0,1-5.84.53q-3.76,0-4.67-1.86t-.89-7.85q0-1.41,5.31-2.1A9.82,9.82,0,0,0,58.77,69a3,3,0,0,0,1.64-2.72c0-1.15-.93-1.73-2.79-1.73a13.86,13.86,0,0,0-5.84,1.43,19,19,0,0,1-3.49,1.42ZM58,84.17a15.13,15.13,0,0,1,6.43,1.08q2.23,1.08,2.23,4.48,0,5.56-8.66,5.56t-8.65-5.56q0-5.57,8.65-5.56Z"/></svg>         
-            </div>
-            <div>
-              <div class="group relative">
-                <h3 class="mt-3 text-2xl/6 font-semibold text-gray-900">
-                  What We Do at Lightening Lives
-                </h3>
-                <p class="mt-5 text-lg/8 text-gray-600 hover:text-gray-600">
-                  Our mission is to provide affordable, quick, and robust diagnostic screening tests specifically for hemoglobinopathies and musculopathies. We aim to make these critical tests accessible to underprivileged communities who need them the most, empowering individuals with early detection and timely intervention. Our goal is to empower these populations with early detection, enabling better health outcomes and a higher quality of life.
+            <div class="flex flex-col">
+              <dt class="text-base/7 font-semibold text-gray-900">
+                <div class="mb-6 flex size-20">
+                  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 95.29"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>what</title><path class="cls-1" d="M10.66,0H112.22a10.68,10.68,0,0,1,10.66,10.66v49a10.69,10.69,0,0,1-10.66,10.66l-27.51,0a18.48,18.48,0,0,0,.63-2.08h0a22.31,22.31,0,0,0,.47-2.65h24.84a7.09,7.09,0,0,0,7.06-7.07V12.26a7.09,7.09,0,0,0-7.06-7.07H11.46c-3.89,0-6.27,3.18-6.27,7.07V58.42a7.1,7.1,0,0,0,7.07,7.07h2.18a1.79,1.79,0,0,1,1.67,1.91L16,76.56,27.57,66a1.73,1.73,0,0,1,1.26-.52h8.84l0,.09a21.16,21.16,0,0,0,2,4.58h-9l-16.19,14A1.79,1.79,0,0,1,12,84a1.85,1.85,0,0,1-.43-1.29L10.8,70.27h-.14A10.69,10.69,0,0,1,0,59.62v-49A10.68,10.68,0,0,1,10.66,0ZM25.09,42.35A5.87,5.87,0,0,1,23,42.12a1.29,1.29,0,0,1-.68-.78l-7.2-19.86c0-.41.78-.89,2.33-1.43a14.21,14.21,0,0,1,4.7-.81c2,0,3.13.63,3.26,1.92l1.11,10.31H27l.91-10.31c.11-1.29,1.58-1.92,4.4-1.92a3.81,3.81,0,0,1,2.18.43,1.64,1.64,0,0,1,.62,1.16l1.07,10.64h.46l.84-10.31c.07-.63.81-1.11,2.23-1.44A19.26,19.26,0,0,1,44,19.24a4.82,4.82,0,0,1,2.87.61,1.73,1.73,0,0,1,.76,1.31l-7,20.18c-.24.67-1.85,1-4.82,1A4.63,4.63,0,0,1,34,42.12a1.21,1.21,0,0,1-.62-.78L31.7,35.67h-.39l-1.73,5.67c-.19.67-1.69,1-4.49,1ZM60,41.56v-9A23,23,0,0,0,59.8,29c-.13-.74-.45-1.11-.95-1.11s-.65.29-.65.88V41.56c0,.24-.62.43-1.88.57a32.77,32.77,0,0,1-3.88.22,10.13,10.13,0,0,1-2.5-.18c-.35-.12-.52-.32-.52-.61V19c0-.46.63-.91,1.88-1.37a11.51,11.51,0,0,1,4-.68c1.46,0,2.38.27,2.77.81a.91.91,0,0,1,.2.55v4.79l-.36,2.24h.23a3.88,3.88,0,0,1,1.43-1.2,8.28,8.28,0,0,1,4-1c2.06,0,3.46.66,4.18,2s1.09,3.45,1.09,6.4v10c0,.24-.63.43-1.9.57a33,33,0,0,1-3.87.22,10,10,0,0,1-2.49-.18c-.35-.12-.53-.32-.53-.61Zm17.62,1.08A7.11,7.11,0,0,1,73,41.24a4.79,4.79,0,0,1-1.19-1.73,6.49,6.49,0,0,1-.5-2.67A4.76,4.76,0,0,1,72,34.18a5.4,5.4,0,0,1,1.77-1.76,10.28,10.28,0,0,1,2.44-1,18.33,18.33,0,0,1,4.66-.55h1.07A2,2,0,0,0,81,29a2.45,2.45,0,0,0-1.19-.23,5.67,5.67,0,0,0-1.92.42,11.42,11.42,0,0,0-1.87.87,2.71,2.71,0,0,1-1,.43c-.39,0-.92-.51-1.59-1.54a5.22,5.22,0,0,1-1-2.82c0-.28.4-.65,1.2-1.1A14.24,14.24,0,0,1,77,23.74a17.09,17.09,0,0,1,4.28-.57,16.37,16.37,0,0,1,3.6.35,10.15,10.15,0,0,1,2.47.83A4.82,4.82,0,0,1,89,25.65a8.83,8.83,0,0,1,1,1.46,5.55,5.55,0,0,1,.51,1.69,16.61,16.61,0,0,1,.22,3v9.79q0,.36-1.74.57a26.87,26.87,0,0,1-3.45.22,15.65,15.65,0,0,1-2.21-.1c-.34-.07-.54-.14-.6-.23a1.23,1.23,0,0,1-.17-.46l-.26-1.85h-.26q-.81,2.92-4.46,2.93ZM82,37.24V33.43a1.61,1.61,0,0,0-1.36.71,2.69,2.69,0,0,0-.52,1.63c0,1.43.32,2.15,1,2.15a1,1,0,0,0,.67-.21.62.62,0,0,0,.24-.47Zm24.23,4.81a4.22,4.22,0,0,1-2.67.56,18.16,18.16,0,0,1-3.45-.28,7.29,7.29,0,0,1-2.6-1.09C95.89,40.18,95.1,38,95.1,34.6V29.52H93.47c-.24,0-.44-.25-.62-.75a6.55,6.55,0,0,1-.26-2.05A6,6,0,0,1,93,24.43c.27-.67.62-1,1.06-1h1V19.49c0-.67.66-1.21,2-1.62a12.6,12.6,0,0,1,3.86-.62c2,0,3,.49,3,1.46v4.72h2.41c.56,0,.84.82.84,2.44a7.81,7.81,0,0,1-.37,2.63q-.37,1-1,1h-1.92v6a1.3,1.3,0,0,0,.75,1.25,3,3,0,0,0,1.32.37.66.66,0,0,1,.7.56,8.3,8.3,0,0,1,.13,1.66c0,1.45-.2,2.36-.59,2.73Z"/><path class="cls-2" d="M48.29,67.36q-1.73,0-3-4.11A26.88,26.88,0,0,1,44,55.37c0-.58.63-1.23,1.91-1.95a21.81,21.81,0,0,1,5.81-1.92,40.9,40.9,0,0,1,8.47-.83Q78,50.67,78,63a12.25,12.25,0,0,1-1.45,6.09A9.64,9.64,0,0,1,73,72.86a16.6,16.6,0,0,1-7.6,2.35L64,75.27a11.67,11.67,0,0,0,.31,2.16,13.47,13.47,0,0,1,.31,2.6c0,.66-1.12,1.16-3.37,1.51a38.75,38.75,0,0,1-5.84.53q-3.76,0-4.67-1.86t-.89-7.85q0-1.41,5.31-2.1A9.82,9.82,0,0,0,58.77,69a3,3,0,0,0,1.64-2.72c0-1.15-.93-1.73-2.79-1.73a13.86,13.86,0,0,0-5.84,1.43,19,19,0,0,1-3.49,1.42ZM58,84.17a15.13,15.13,0,0,1,6.43,1.08q2.23,1.08,2.23,4.48,0,5.56-8.66,5.56t-8.65-5.56q0-5.57,8.65-5.56Z"/></svg>
+                </div>
+                <!-- What -->
+              </dt>
+              <dd class="mt-1 flex flex-auto flex-col text-base/7 text-gray-600">
+                <p class="flex-auto">Every company or individual knows what they do, whether it&#39;s a product,
+                  service, or job role. This is easy to identify.</p>
+                <p class="mt-6">
+                  <a href="#mission" class="text-sm/6 font-semibold text-indigo-600">Learn more <span aria-hidden="true">→</span></a>
                 </p>
-              </div>
+              </dd>
             </div>
-          </div>
-          <div class="relative isolate flex flex-col gap-12 lg:flex-row">
-            <div class="relative aspect-video sm:aspect-2/1 lg:aspect-square lg:w-24 lg:shrink-0">
-              <svg class="absolute inset-0 size-full rounded-2xl object-cover" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 103.34"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>how</title><path class="cls-1" d="M11.56,0h99.76a11.59,11.59,0,0,1,11.56,11.56V64.65a11.59,11.59,0,0,1-11.56,11.56l-24.64,0a19.6,19.6,0,0,0,.68-2.26h0A24.15,24.15,0,0,0,87.84,71h21.74a7.69,7.69,0,0,0,7.66-7.66V13.29a7.69,7.69,0,0,0-7.66-7.66H12.42c-4.21,0-6.79,3.45-6.79,7.66V63.35A7.69,7.69,0,0,0,13.29,71h2.37a1.94,1.94,0,0,1,1.81,2.07L17.3,83,29.89,71.58A1.94,1.94,0,0,1,31.26,71h4.41l0,.11a22.74,22.74,0,0,0,2.13,4.95H33.26L15.71,91.3A1.94,1.94,0,0,1,13,91.08a1.91,1.91,0,0,1-.46-1.39L11.72,76.2h-.16A11.58,11.58,0,0,1,0,64.65V11.56A11.59,11.59,0,0,1,11.56,0Zm19,44.9c0,.3-.71.55-2.14.74a32.35,32.35,0,0,1-4.3.28,9.29,9.29,0,0,1-2.79-.25.82.82,0,0,1-.62-.77V23.19c0-.59.68-1.13,2.05-1.61a13.31,13.31,0,0,1,4.45-.72c2.23,0,3.35.53,3.35,1.59v7.76H33.7v-7c0-.59.69-1.13,2.07-1.61a13.41,13.41,0,0,1,4.46-.72c2.21,0,3.32.53,3.32,1.59V44.9c0,.3-.72.55-2.15.74a32.83,32.83,0,0,1-4.31.28,9.17,9.17,0,0,1-2.77-.25.82.82,0,0,1-.62-.77V36.81H30.56V44.9Zm26.51,1.34a20.09,20.09,0,0,1-4.56-.46,9.3,9.3,0,0,1-3.45-1.63q-3.23-2.32-3.22-8.68c0-3.76,1.1-6.46,3.29-8.08a13,13,0,0,1,7.94-2.26,27.76,27.76,0,0,1,3.56.19,12.08,12.08,0,0,1,3,.83,6.46,6.46,0,0,1,2.47,1.73,8.45,8.45,0,0,1,1.54,3,15.44,15.44,0,0,1,.6,4.57q0,5.37-3,8.07a11.81,11.81,0,0,1-8.15,2.7Zm-1.24-6.89a3.59,3.59,0,0,0,.51,1.52,1.13,1.13,0,0,0,1.42,0,3.39,3.39,0,0,0,.49-1.52,18.66,18.66,0,0,0,.23-3.19c0-1.28,0-2.27-.09-3a13.75,13.75,0,0,0-.21-1.61,2.34,2.34,0,0,0-.34-.88.9.9,0,0,0-.75-.46,1.05,1.05,0,0,0-.73.26,3.53,3.53,0,0,0-.53,1.55,21.27,21.27,0,0,0-.24,3.66,20.8,20.8,0,0,0,.24,3.63Zm41.34,5.72c-.31.57-1.9.85-4.79.85s-4.38-.28-4.5-.85l-1.2-6.42h-.49l-1.13,6.42q-.11.85-6.18.85a8.2,8.2,0,0,1-2.24-.19,1.26,1.26,0,0,1-.76-.66q-6.55-16.12-6.56-17c0-.56.85-1.14,2.56-1.74a14.76,14.76,0,0,1,4.92-.9c2,0,3.07.54,3.14,1.62l1.2,9.67h.43l.42-7.8c0-.59.62-1.1,1.8-1.55a9.89,9.89,0,0,1,3.56-.67,6.37,6.37,0,0,1,2.71.44q.9.43.93,1.08l.39,8.5h.39l1.16-9.07c.07-.56.87-1.08,2.38-1.53a14.11,14.11,0,0,1,4-.69,6.18,6.18,0,0,1,2.72.49c1.08.52,1.62,1.13,1.62,1.84q0,.11-3.19,8.61t-3.3,8.68Z"/><path class="cls-2" d="M47.18,73c-1.25,0-2.33-1.48-3.25-4.46A29.11,29.11,0,0,1,42.56,60c0-.63.69-1.33,2.07-2.11a23.43,23.43,0,0,1,6.3-2.08,44.14,44.14,0,0,1,9.19-.9q19.23,0,19.23,13.4A13.16,13.16,0,0,1,77.78,75,10.47,10.47,0,0,1,74,79a17.92,17.92,0,0,1-8.24,2.54l-1.55.07A13.6,13.6,0,0,0,64.54,84a14.22,14.22,0,0,1,.33,2.81c0,.72-1.21,1.26-3.65,1.64a41.73,41.73,0,0,1-6.33.57c-2.73,0-4.41-.67-5.06-2s-1-4.17-1-8.51q0-1.55,5.76-2.28a10.52,10.52,0,0,0,3.92-1.41,3.27,3.27,0,0,0,1.78-2.94c0-1.26-1-1.88-3-1.88A15,15,0,0,0,51,71.5,19.78,19.78,0,0,1,47.18,73ZM57.7,91.27a16.41,16.41,0,0,1,7,1.17q2.42,1.19,2.42,4.86,0,6-9.39,6t-9.38-6q0-6,9.38-6Z"/></svg>              
-            </div>
-            <div>
-              <div class="group relative">
-                <h3 class="mt-3 text-2xl/6 font-semibold text-gray-900">
-                  How We Achieve Our Mission
-                </h3>
-                <p class="mt-5 text-lg/8 text-gray-600 hover:text-gray-600">
-                  We leverage our extensive network of clinicians, doctors, NGOs, government sectors, and national health ministries to reach as many individuals as possible. Our approach is focused on improving the scope and logistics of newborn screening, promoting genetic counselling, and screening at-risk populations to minimize or eradicate hemoglobinopathies and musculopathies through carrier counselling and pre-natal diagnosis. Through these efforts, we aim to raise awareness, provide accessible diagnostic services, and ultimately improve the quality of life for individuals affected by these genetic disorders. Additionally, we have developed a breakthrough method that uses just a single drop of blood for molecular screening—minimally invasive and more convenient compared to the large blood volumes collected through more invasive intravenous blood collection in EDTA tubes. This near painless and efficient technique allows us to deliver accurate results within a single day, ensuring faster diagnosis and quicker intervention for the communities that need it most.
+            <div class="flex flex-col">
+              <dt class="text-base/7 font-semibold text-gray-900">
+                <div class="mb-6 flex size-20">
+                  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 103.34"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>how</title><path class="cls-1" d="M11.56,0h99.76a11.59,11.59,0,0,1,11.56,11.56V64.65a11.59,11.59,0,0,1-11.56,11.56l-24.64,0a19.6,19.6,0,0,0,.68-2.26h0A24.15,24.15,0,0,0,87.84,71h21.74a7.69,7.69,0,0,0,7.66-7.66V13.29a7.69,7.69,0,0,0-7.66-7.66H12.42c-4.21,0-6.79,3.45-6.79,7.66V63.35A7.69,7.69,0,0,0,13.29,71h2.37a1.94,1.94,0,0,1,1.81,2.07L17.3,83,29.89,71.58A1.94,1.94,0,0,1,31.26,71h4.41l0,.11a22.74,22.74,0,0,0,2.13,4.95H33.26L15.71,91.3A1.94,1.94,0,0,1,13,91.08a1.91,1.91,0,0,1-.46-1.39L11.72,76.2h-.16A11.58,11.58,0,0,1,0,64.65V11.56A11.59,11.59,0,0,1,11.56,0Zm19,44.9c0,.3-.71.55-2.14.74a32.35,32.35,0,0,1-4.3.28,9.29,9.29,0,0,1-2.79-.25.82.82,0,0,1-.62-.77V23.19c0-.59.68-1.13,2.05-1.61a13.31,13.31,0,0,1,4.45-.72c2.23,0,3.35.53,3.35,1.59v7.76H33.7v-7c0-.59.69-1.13,2.07-1.61a13.41,13.41,0,0,1,4.46-.72c2.21,0,3.32.53,3.32,1.59V44.9c0,.3-.72.55-2.15.74a32.83,32.83,0,0,1-4.31.28,9.17,9.17,0,0,1-2.77-.25.82.82,0,0,1-.62-.77V36.81H30.56V44.9Zm26.51,1.34a20.09,20.09,0,0,1-4.56-.46,9.3,9.3,0,0,1-3.45-1.63q-3.23-2.32-3.22-8.68c0-3.76,1.1-6.46,3.29-8.08a13,13,0,0,1,7.94-2.26,27.76,27.76,0,0,1,3.56.19,12.08,12.08,0,0,1,3,.83,6.46,6.46,0,0,1,2.47,1.73,8.45,8.45,0,0,1,1.54,3,15.44,15.44,0,0,1,.6,4.57q0,5.37-3,8.07a11.81,11.81,0,0,1-8.15,2.7Zm-1.24-6.89a3.59,3.59,0,0,0,.51,1.52,1.13,1.13,0,0,0,1.42,0,3.39,3.39,0,0,0,.49-1.52,18.66,18.66,0,0,0,.23-3.19c0-1.28,0-2.27-.09-3a13.75,13.75,0,0,0-.21-1.61,2.34,2.34,0,0,0-.34-.88.9.9,0,0,0-.75-.46,1.05,1.05,0,0,0-.73.26,3.53,3.53,0,0,0-.53,1.55,21.27,21.27,0,0,0-.24,3.66,20.8,20.8,0,0,0,.24,3.63Zm41.34,5.72c-.31.57-1.9.85-4.79.85s-4.38-.28-4.5-.85l-1.2-6.42h-.49l-1.13,6.42q-.11.85-6.18.85a8.2,8.2,0,0,1-2.24-.19,1.26,1.26,0,0,1-.76-.66q-6.55-16.12-6.56-17c0-.56.85-1.14,2.56-1.74a14.76,14.76,0,0,1,4.92-.9c2,0,3.07.54,3.14,1.62l1.2,9.67h.43l.42-7.8c0-.59.62-1.1,1.8-1.55a9.89,9.89,0,0,1,3.56-.67,6.37,6.37,0,0,1,2.71.44q.9.43.93,1.08l.39,8.5h.39l1.16-9.07c.07-.56.87-1.08,2.38-1.53a14.11,14.11,0,0,1,4-.69,6.18,6.18,0,0,1,2.72.49c1.08.52,1.62,1.13,1.62,1.84q0,.11-3.19,8.61t-3.3,8.68Z"/><path class="cls-2" d="M47.18,73c-1.25,0-2.33-1.48-3.25-4.46A29.11,29.11,0,0,1,42.56,60c0-.63.69-1.33,2.07-2.11a23.43,23.43,0,0,1,6.3-2.08,44.14,44.14,0,0,1,9.19-.9q19.23,0,19.23,13.4A13.16,13.16,0,0,1,77.78,75,10.47,10.47,0,0,1,74,79a17.92,17.92,0,0,1-8.24,2.54l-1.55.07A13.6,13.6,0,0,0,64.54,84a14.22,14.22,0,0,1,.33,2.81c0,.72-1.21,1.26-3.65,1.64a41.73,41.73,0,0,1-6.33.57c-2.73,0-4.41-.67-5.06-2s-1-4.17-1-8.51q0-1.55,5.76-2.28a10.52,10.52,0,0,0,3.92-1.41,3.27,3.27,0,0,0,1.78-2.94c0-1.26-1-1.88-3-1.88A15,15,0,0,0,51,71.5,19.78,19.78,0,0,1,47.18,73ZM57.7,91.27a16.41,16.41,0,0,1,7,1.17q2.42,1.19,2.42,4.86,0,6-9.39,6t-9.38-6q0-6,9.38-6Z"/></svg>              
+                </div>
+                <!-- How -->
+              </dt>
+              <dd class="mt-1 flex flex-auto flex-col text-base/7 text-gray-600">
+                <p class="flex-auto">Some people or organizations understand how they do what they do—this
+                  could be a unique process or selling point, but it&#39;s not as obvious as WHAT.</p>
+                <p class="mt-6">
+                  <a href="#mission" class="text-sm/6 font-semibold text-indigo-600">Learn more <span aria-hidden="true">→</span></a>
                 </p>
-              </div>
+              </dd>
             </div>
-          </div>                    
+          </dl>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Team -->
-  <div class="bg-white py-24 sm:py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl sm:text-center">
-        <h2 class="text-34l font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">Meet our leadership</h2>
-        <p class="mt-6 text-lg/8 text-gray-600">At Lightning Lives, we are a dynamic and self-sufficient team with expertise across various
-          key areas essential for an emerging startup.</p>
+    <!-- Why, what and How -->
+    <div class="bg-white py-24 sm:py-32" id="mission">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="">
+          <h2 class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Here is our Why, What and How</h2>
+          <!-- <p class="mt-2 text-lg/8 text-gray-600">Most organizations communicate from the outside in, starting with WHAT, then HOW, and rarely focusing on WHY. But at Lightening Lives we follow Why, What and How in the sequential order.</p> -->
+          <div class="mt-16 space-y-12 lg:mt-20 lg:space-y-12">
+            <div class="relative isolate flex flex-col gap-12 lg:flex-row">
+              <div class="relative aspect-video sm:aspect-2/1 lg:aspect-square lg:w-24 lg:shrink-0">
+                <svg class="absolute inset-0 size-full rounded-2xl object-cover" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 103.34"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>why</title><path class="cls-1" d="M11.56,0h99.76a11.59,11.59,0,0,1,11.56,11.56V64.65a11.59,11.59,0,0,1-11.56,11.56l-24.64,0a19.6,19.6,0,0,0,.68-2.26h0A24.15,24.15,0,0,0,87.84,71h21.74a7.69,7.69,0,0,0,7.66-7.66V13.29a7.69,7.69,0,0,0-7.66-7.66H12.42c-4.21,0-6.79,3.45-6.79,7.66V63.35A7.69,7.69,0,0,0,13.29,71h2.37a1.94,1.94,0,0,1,1.81,2.07L17.3,83,29.89,71.58A1.94,1.94,0,0,1,31.26,71h4.41l0,.11a22.74,22.74,0,0,0,2.13,4.95H33.26L15.71,91.3A1.94,1.94,0,0,1,13,91.08a1.91,1.91,0,0,1-.46-1.39L11.72,76.2h-.16A11.58,11.58,0,0,1,0,64.65V11.56A11.59,11.59,0,0,1,11.56,0ZM31.27,45.92a6.13,6.13,0,0,1-2.22-.25,1.39,1.39,0,0,1-.75-.84L20.5,23.29c0-.44.84-1,2.53-1.55a15.29,15.29,0,0,1,5.1-.88c2.21,0,3.39.69,3.53,2.08l1.2,11.19h.49l1-11.19q.18-2.09,4.77-2.08a4.14,4.14,0,0,1,2.36.47,1.76,1.76,0,0,1,.67,1.26l1.17,11.54h.49l.92-11.19c.07-.68.87-1.2,2.42-1.55a20.07,20.07,0,0,1,4.58-.53,5.16,5.16,0,0,1,3.11.67,1.88,1.88,0,0,1,.83,1.41L48.11,44.83q-.39,1.1-5.23,1.09a4.9,4.9,0,0,1-1.94-.25,1.28,1.28,0,0,1-.67-.84l-1.84-6.15H38l-1.87,6.15c-.21.73-1.83,1.09-4.87,1.09Zm37.85-.85V35.26a25,25,0,0,0-.21-3.85c-.15-.8-.49-1.2-1-1.2s-.7.32-.7.95V45.07c0,.26-.69.47-2.05.62a38.56,38.56,0,0,1-4.2.23,11.21,11.21,0,0,1-2.72-.19c-.38-.13-.56-.35-.56-.66V20.61c0-.49.68-1,2-1.48A12.44,12.44,0,0,1,64,18.39c1.58,0,2.58.29,3,.88a1,1,0,0,1,.21.6v5.19l-.39,2.43h.25a4.18,4.18,0,0,1,1.55-1.3,9,9,0,0,1,4.31-1.06c2.23,0,3.75.71,4.54,2.14S78.65,31,78.65,34.2V45.07c0,.26-.69.47-2.07.62a38.56,38.56,0,0,1-4.2.23,11.11,11.11,0,0,1-2.7-.19c-.37-.13-.56-.35-.56-.66Zm24.29-1.45V41.54h-.28c-.12.12-.3.27-.53.46a6.63,6.63,0,0,1-1.66.74A8.63,8.63,0,0,1,88,43.2a7.33,7.33,0,0,1-2.83-.51,4.8,4.8,0,0,1-1.92-1.38A6.06,6.06,0,0,1,82.19,39a24.18,24.18,0,0,1-.67-6.49V27.64c0-.5.69-1,2.08-1.47A13.32,13.32,0,0,1,88,25.45c2,0,3.07.53,3.07,1.59v4.44c0,4.71.37,7.06,1.13,7.06.44,0,.67-.32.67-.95v-10q0-.75,2.22-1.47a15.37,15.37,0,0,1,4.77-.72c1.69,0,2.54.46,2.54,1.37v16.7q0,7.88-10.66,7.87c-3.74,0-6.29-.36-7.63-1.09-.59-.33-.88-.67-.88-1a10.15,10.15,0,0,1,.71-2.84c.47-1.33.9-2,1.3-2a7.2,7.2,0,0,1,1,.21,17.33,17.33,0,0,0,4.36.7A4.45,4.45,0,0,0,92.86,45a1.53,1.53,0,0,0,.55-1.35Z"/><path class="cls-2" d="M47.18,73c-1.25,0-2.33-1.48-3.25-4.46A29.11,29.11,0,0,1,42.56,60c0-.63.69-1.33,2.07-2.11a23.43,23.43,0,0,1,6.3-2.08,44.14,44.14,0,0,1,9.19-.9q19.23,0,19.23,13.4A13.16,13.16,0,0,1,77.78,75,10.47,10.47,0,0,1,74,79a17.92,17.92,0,0,1-8.24,2.54l-1.55.07A13.6,13.6,0,0,0,64.54,84a14.22,14.22,0,0,1,.33,2.81c0,.72-1.21,1.26-3.65,1.64a41.73,41.73,0,0,1-6.33.57c-2.73,0-4.41-.67-5.06-2s-1-4.17-1-8.51q0-1.55,5.76-2.28a10.52,10.52,0,0,0,3.92-1.41,3.27,3.27,0,0,0,1.78-2.94c0-1.26-1-1.88-3-1.88A15,15,0,0,0,51,71.5,19.78,19.78,0,0,1,47.18,73ZM57.7,91.27a16.41,16.41,0,0,1,7,1.17q2.42,1.19,2.42,4.86,0,6-9.39,6t-9.38-6q0-6,9.38-6Z"/></svg>              
+              </div>
+              <div>
+                <div class="group relative">
+                  <h3 class="mt-3 text-2xl/6 font-semibold text-gray-900">
+                    Why We Started Lightening Lives
+                  </h3>
+                  <p class="mt-5 text-lg/8 text-gray-600 hover:text-gray-600">
+                    After over 25 years of experience in the diagnostics field and building strong networks with
+                    clinicians, national health ministers, NGOs, academics, and companies, we felt a deep
+                    responsibility to give back to all the sections of the society. We realized that the most
+                    underserved and vulnerable populations, particularly those from economically weaker
+                    sections, are often the ones who need affordable diagnostic services the most. These
+                    communities, despite being the most in need, are frequently overlooked when it comes to
+                    vital healthcare.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="relative isolate flex flex-col gap-12 lg:flex-row">
+              <div class="relative aspect-video sm:aspect-2/1 lg:aspect-square lg:w-24 lg:shrink-0">
+                <svg class="absolute inset-0 size-full rounded-2xl object-cover" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 95.29"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>what</title><path class="cls-1" d="M10.66,0H112.22a10.68,10.68,0,0,1,10.66,10.66v49a10.69,10.69,0,0,1-10.66,10.66l-27.51,0a18.48,18.48,0,0,0,.63-2.08h0a22.31,22.31,0,0,0,.47-2.65h24.84a7.09,7.09,0,0,0,7.06-7.07V12.26a7.09,7.09,0,0,0-7.06-7.07H11.46c-3.89,0-6.27,3.18-6.27,7.07V58.42a7.1,7.1,0,0,0,7.07,7.07h2.18a1.79,1.79,0,0,1,1.67,1.91L16,76.56,27.57,66a1.73,1.73,0,0,1,1.26-.52h8.84l0,.09a21.16,21.16,0,0,0,2,4.58h-9l-16.19,14A1.79,1.79,0,0,1,12,84a1.85,1.85,0,0,1-.43-1.29L10.8,70.27h-.14A10.69,10.69,0,0,1,0,59.62v-49A10.68,10.68,0,0,1,10.66,0ZM25.09,42.35A5.87,5.87,0,0,1,23,42.12a1.29,1.29,0,0,1-.68-.78l-7.2-19.86c0-.41.78-.89,2.33-1.43a14.21,14.21,0,0,1,4.7-.81c2,0,3.13.63,3.26,1.92l1.11,10.31H27l.91-10.31c.11-1.29,1.58-1.92,4.4-1.92a3.81,3.81,0,0,1,2.18.43,1.64,1.64,0,0,1,.62,1.16l1.07,10.64h.46l.84-10.31c.07-.63.81-1.11,2.23-1.44A19.26,19.26,0,0,1,44,19.24a4.82,4.82,0,0,1,2.87.61,1.73,1.73,0,0,1,.76,1.31l-7,20.18c-.24.67-1.85,1-4.82,1A4.63,4.63,0,0,1,34,42.12a1.21,1.21,0,0,1-.62-.78L31.7,35.67h-.39l-1.73,5.67c-.19.67-1.69,1-4.49,1ZM60,41.56v-9A23,23,0,0,0,59.8,29c-.13-.74-.45-1.11-.95-1.11s-.65.29-.65.88V41.56c0,.24-.62.43-1.88.57a32.77,32.77,0,0,1-3.88.22,10.13,10.13,0,0,1-2.5-.18c-.35-.12-.52-.32-.52-.61V19c0-.46.63-.91,1.88-1.37a11.51,11.51,0,0,1,4-.68c1.46,0,2.38.27,2.77.81a.91.91,0,0,1,.2.55v4.79l-.36,2.24h.23a3.88,3.88,0,0,1,1.43-1.2,8.28,8.28,0,0,1,4-1c2.06,0,3.46.66,4.18,2s1.09,3.45,1.09,6.4v10c0,.24-.63.43-1.9.57a33,33,0,0,1-3.87.22,10,10,0,0,1-2.49-.18c-.35-.12-.53-.32-.53-.61Zm17.62,1.08A7.11,7.11,0,0,1,73,41.24a4.79,4.79,0,0,1-1.19-1.73,6.49,6.49,0,0,1-.5-2.67A4.76,4.76,0,0,1,72,34.18a5.4,5.4,0,0,1,1.77-1.76,10.28,10.28,0,0,1,2.44-1,18.33,18.33,0,0,1,4.66-.55h1.07A2,2,0,0,0,81,29a2.45,2.45,0,0,0-1.19-.23,5.67,5.67,0,0,0-1.92.42,11.42,11.42,0,0,0-1.87.87,2.71,2.71,0,0,1-1,.43c-.39,0-.92-.51-1.59-1.54a5.22,5.22,0,0,1-1-2.82c0-.28.4-.65,1.2-1.1A14.24,14.24,0,0,1,77,23.74a17.09,17.09,0,0,1,4.28-.57,16.37,16.37,0,0,1,3.6.35,10.15,10.15,0,0,1,2.47.83A4.82,4.82,0,0,1,89,25.65a8.83,8.83,0,0,1,1,1.46,5.55,5.55,0,0,1,.51,1.69,16.61,16.61,0,0,1,.22,3v9.79q0,.36-1.74.57a26.87,26.87,0,0,1-3.45.22,15.65,15.65,0,0,1-2.21-.1c-.34-.07-.54-.14-.6-.23a1.23,1.23,0,0,1-.17-.46l-.26-1.85h-.26q-.81,2.92-4.46,2.93ZM82,37.24V33.43a1.61,1.61,0,0,0-1.36.71,2.69,2.69,0,0,0-.52,1.63c0,1.43.32,2.15,1,2.15a1,1,0,0,0,.67-.21.62.62,0,0,0,.24-.47Zm24.23,4.81a4.22,4.22,0,0,1-2.67.56,18.16,18.16,0,0,1-3.45-.28,7.29,7.29,0,0,1-2.6-1.09C95.89,40.18,95.1,38,95.1,34.6V29.52H93.47c-.24,0-.44-.25-.62-.75a6.55,6.55,0,0,1-.26-2.05A6,6,0,0,1,93,24.43c.27-.67.62-1,1.06-1h1V19.49c0-.67.66-1.21,2-1.62a12.6,12.6,0,0,1,3.86-.62c2,0,3,.49,3,1.46v4.72h2.41c.56,0,.84.82.84,2.44a7.81,7.81,0,0,1-.37,2.63q-.37,1-1,1h-1.92v6a1.3,1.3,0,0,0,.75,1.25,3,3,0,0,0,1.32.37.66.66,0,0,1,.7.56,8.3,8.3,0,0,1,.13,1.66c0,1.45-.2,2.36-.59,2.73Z"/><path class="cls-2" d="M48.29,67.36q-1.73,0-3-4.11A26.88,26.88,0,0,1,44,55.37c0-.58.63-1.23,1.91-1.95a21.81,21.81,0,0,1,5.81-1.92,40.9,40.9,0,0,1,8.47-.83Q78,50.67,78,63a12.25,12.25,0,0,1-1.45,6.09A9.64,9.64,0,0,1,73,72.86a16.6,16.6,0,0,1-7.6,2.35L64,75.27a11.67,11.67,0,0,0,.31,2.16,13.47,13.47,0,0,1,.31,2.6c0,.66-1.12,1.16-3.37,1.51a38.75,38.75,0,0,1-5.84.53q-3.76,0-4.67-1.86t-.89-7.85q0-1.41,5.31-2.1A9.82,9.82,0,0,0,58.77,69a3,3,0,0,0,1.64-2.72c0-1.15-.93-1.73-2.79-1.73a13.86,13.86,0,0,0-5.84,1.43,19,19,0,0,1-3.49,1.42ZM58,84.17a15.13,15.13,0,0,1,6.43,1.08q2.23,1.08,2.23,4.48,0,5.56-8.66,5.56t-8.65-5.56q0-5.57,8.65-5.56Z"/></svg>         
+              </div>
+              <div>
+                <div class="group relative">
+                  <h3 class="mt-3 text-2xl/6 font-semibold text-gray-900">
+                    What We Do at Lightening Lives
+                  </h3>
+                  <p class="mt-5 text-lg/8 text-gray-600 hover:text-gray-600">
+                    Our mission is to provide affordable, quick, and robust diagnostic screening tests specifically for hemoglobinopathies and musculopathies. We aim to make these critical tests accessible to underprivileged communities who need them the most, empowering individuals with early detection and timely intervention. Our goal is to empower these populations with early detection, enabling better health outcomes and a higher quality of life.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="relative isolate flex flex-col gap-12 lg:flex-row">
+              <div class="relative aspect-video sm:aspect-2/1 lg:aspect-square lg:w-24 lg:shrink-0">
+                <svg class="absolute inset-0 size-full rounded-2xl object-cover" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 103.34"><defs><style>.cls-1{fill-rule:evenodd;}.cls-2{fill:#ff4141;}</style></defs><title>how</title><path class="cls-1" d="M11.56,0h99.76a11.59,11.59,0,0,1,11.56,11.56V64.65a11.59,11.59,0,0,1-11.56,11.56l-24.64,0a19.6,19.6,0,0,0,.68-2.26h0A24.15,24.15,0,0,0,87.84,71h21.74a7.69,7.69,0,0,0,7.66-7.66V13.29a7.69,7.69,0,0,0-7.66-7.66H12.42c-4.21,0-6.79,3.45-6.79,7.66V63.35A7.69,7.69,0,0,0,13.29,71h2.37a1.94,1.94,0,0,1,1.81,2.07L17.3,83,29.89,71.58A1.94,1.94,0,0,1,31.26,71h4.41l0,.11a22.74,22.74,0,0,0,2.13,4.95H33.26L15.71,91.3A1.94,1.94,0,0,1,13,91.08a1.91,1.91,0,0,1-.46-1.39L11.72,76.2h-.16A11.58,11.58,0,0,1,0,64.65V11.56A11.59,11.59,0,0,1,11.56,0Zm19,44.9c0,.3-.71.55-2.14.74a32.35,32.35,0,0,1-4.3.28,9.29,9.29,0,0,1-2.79-.25.82.82,0,0,1-.62-.77V23.19c0-.59.68-1.13,2.05-1.61a13.31,13.31,0,0,1,4.45-.72c2.23,0,3.35.53,3.35,1.59v7.76H33.7v-7c0-.59.69-1.13,2.07-1.61a13.41,13.41,0,0,1,4.46-.72c2.21,0,3.32.53,3.32,1.59V44.9c0,.3-.72.55-2.15.74a32.83,32.83,0,0,1-4.31.28,9.17,9.17,0,0,1-2.77-.25.82.82,0,0,1-.62-.77V36.81H30.56V44.9Zm26.51,1.34a20.09,20.09,0,0,1-4.56-.46,9.3,9.3,0,0,1-3.45-1.63q-3.23-2.32-3.22-8.68c0-3.76,1.1-6.46,3.29-8.08a13,13,0,0,1,7.94-2.26,27.76,27.76,0,0,1,3.56.19,12.08,12.08,0,0,1,3,.83,6.46,6.46,0,0,1,2.47,1.73,8.45,8.45,0,0,1,1.54,3,15.44,15.44,0,0,1,.6,4.57q0,5.37-3,8.07a11.81,11.81,0,0,1-8.15,2.7Zm-1.24-6.89a3.59,3.59,0,0,0,.51,1.52,1.13,1.13,0,0,0,1.42,0,3.39,3.39,0,0,0,.49-1.52,18.66,18.66,0,0,0,.23-3.19c0-1.28,0-2.27-.09-3a13.75,13.75,0,0,0-.21-1.61,2.34,2.34,0,0,0-.34-.88.9.9,0,0,0-.75-.46,1.05,1.05,0,0,0-.73.26,3.53,3.53,0,0,0-.53,1.55,21.27,21.27,0,0,0-.24,3.66,20.8,20.8,0,0,0,.24,3.63Zm41.34,5.72c-.31.57-1.9.85-4.79.85s-4.38-.28-4.5-.85l-1.2-6.42h-.49l-1.13,6.42q-.11.85-6.18.85a8.2,8.2,0,0,1-2.24-.19,1.26,1.26,0,0,1-.76-.66q-6.55-16.12-6.56-17c0-.56.85-1.14,2.56-1.74a14.76,14.76,0,0,1,4.92-.9c2,0,3.07.54,3.14,1.62l1.2,9.67h.43l.42-7.8c0-.59.62-1.1,1.8-1.55a9.89,9.89,0,0,1,3.56-.67,6.37,6.37,0,0,1,2.71.44q.9.43.93,1.08l.39,8.5h.39l1.16-9.07c.07-.56.87-1.08,2.38-1.53a14.11,14.11,0,0,1,4-.69,6.18,6.18,0,0,1,2.72.49c1.08.52,1.62,1.13,1.62,1.84q0,.11-3.19,8.61t-3.3,8.68Z"/><path class="cls-2" d="M47.18,73c-1.25,0-2.33-1.48-3.25-4.46A29.11,29.11,0,0,1,42.56,60c0-.63.69-1.33,2.07-2.11a23.43,23.43,0,0,1,6.3-2.08,44.14,44.14,0,0,1,9.19-.9q19.23,0,19.23,13.4A13.16,13.16,0,0,1,77.78,75,10.47,10.47,0,0,1,74,79a17.92,17.92,0,0,1-8.24,2.54l-1.55.07A13.6,13.6,0,0,0,64.54,84a14.22,14.22,0,0,1,.33,2.81c0,.72-1.21,1.26-3.65,1.64a41.73,41.73,0,0,1-6.33.57c-2.73,0-4.41-.67-5.06-2s-1-4.17-1-8.51q0-1.55,5.76-2.28a10.52,10.52,0,0,0,3.92-1.41,3.27,3.27,0,0,0,1.78-2.94c0-1.26-1-1.88-3-1.88A15,15,0,0,0,51,71.5,19.78,19.78,0,0,1,47.18,73ZM57.7,91.27a16.41,16.41,0,0,1,7,1.17q2.42,1.19,2.42,4.86,0,6-9.39,6t-9.38-6q0-6,9.38-6Z"/></svg>              
+              </div>
+              <div>
+                <div class="group relative">
+                  <h3 class="mt-3 text-2xl/6 font-semibold text-gray-900">
+                    How We Achieve Our Mission
+                  </h3>
+                  <p class="mt-5 text-lg/8 text-gray-600 hover:text-gray-600">
+                    We leverage our extensive network of clinicians, doctors, NGOs, government sectors, and national health ministries to reach as many individuals as possible. Our approach is focused on improving the scope and logistics of newborn screening, promoting genetic counselling, and screening at-risk populations to minimize or eradicate hemoglobinopathies and musculopathies through carrier counselling and pre-natal diagnosis. Through these efforts, we aim to raise awareness, provide accessible diagnostic services, and ultimately improve the quality of life for individuals affected by these genetic disorders. Additionally, we have developed a breakthrough method that uses just a single drop of blood for molecular screening—minimally invasive and more convenient compared to the large blood volumes collected through more invasive intravenous blood collection in EDTA tubes. This near painless and efficient technique allows us to deliver accurate results within a single day, ensuring faster diagnosis and quicker intervention for the communities that need it most.
+                  </p>
+                </div>
+              </div>
+            </div>                    
+          </div>
+        </div>
       </div>
-      <ul role="list" class="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-6 gap-y-20 sm:grid-cols-2 lg:max-w-4xl lg:gap-x-8 xl:max-w-none">
-        <li class="flex flex-col gap-6 xl:flex-row">
-          <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="/chandak.jpeg" alt="chandak image">
-          <div class="flex-auto">
-            <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Dr. Giriraj Ratan Chandak</h3>
-            <p class="text-base/7 text-gray-600">Founder & CEO</p>
-            <p class="mt-6 text-base/7 text-gray-600">Dr. Giriraj Ratan Chandak, a renowned physician-scientist, has made significant contributions to genetic research, molecular diagnostics, and sickle cell anaemia eradication. He founded Lightening Lives LLP to develop affordable diagnostic tools, improving global healthcare accessibility.</p>
-          </div>
-        </li>
-        <li class="flex flex-col gap-6 xl:flex-row">
-          <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="/nidhi.jpeg" alt="Nidhi image">
-          <div class="flex-auto">
-            <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Nidhi</h3>
-            <p class="text-base/7 text-gray-600">Co-Founder</p>
-            <p class="mt-6 text-base/7 text-gray-600">Co-Founder of Lightening Lives LLP, leverages her expertise in operations research and data management to optimize affordable diagnostic services for underserved communities, focusing on musculopathies and hemoglobinopathies.</p>
-          </div>
-        </li>
-        <li class="flex flex-col gap-6 xl:flex-row">
-          <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="/manisha.jpg" alt="Manisha image">
-          <div class="flex-auto">
-            <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Manisha Arumalla</h3>
-            <p class="text-base/7 text-gray-600">Founder & CEO</p>
-            <p class="mt-6 text-base/7 text-gray-600">A molecular and cell biologist with expertise in human genetics, protein engineering, and genomic research, plays a key role at Lightening Lives LLP, driving innovations in diagnostics and healthcare accessibility.</p>
-          </div>
-        </li>
-        <li class="flex flex-col gap-6 xl:flex-row">
-          <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="/chandak.jpeg" alt="chandak image">
-          <div class="flex-auto">
-            <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Dr. Giriraj Ratan Chandak</h3>
-            <p class="text-base/7 text-gray-600">Founder & CEO</p>
-            <p class="mt-6 text-base/7 text-gray-600">Dr. Giriraj Ratan Chandak, a renowned physician-scientist, has made significant contributions to genetic research, molecular diagnostics, and sickle cell anaemia eradication. He founded Lightening Lives LLP to develop affordable diagnostic tools, improving global healthcare accessibility.</p>
-          </div>
-        </li>
-        <li class="flex flex-col gap-6 xl:flex-row">
-          <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="/chandak.jpeg" alt="chandak image">
-          <div class="flex-auto">
-            <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Dr. Giriraj Ratan Chandak</h3>
-            <p class="text-base/7 text-gray-600">Founder & CEO</p>
-            <p class="mt-6 text-base/7 text-gray-600">Dr. Giriraj Ratan Chandak, a renowned physician-scientist, has made significant contributions to genetic research, molecular diagnostics, and sickle cell anaemia eradication. He founded Lightening Lives LLP to develop affordable diagnostic tools, improving global healthcare accessibility.</p>
-          </div>
-        </li>                                
-      </ul>
     </div>
-  </div>  
+    <!-- Team -->
+    <div class="bg-gray-50 py-24 sm:py-32" id="team">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl sm:text-center">
+          <h2 class="text-34l font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">Meet our leadership</h2>
+          <p class="mt-6 text-lg/8 text-gray-600">At Lightening Lives, we are a dynamic and self-sufficient team with expertise across various
+            key areas essential for an emerging startup.</p>
+        </div>
+        <ul role="list" class="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-6 gap-y-20 sm:grid-cols-2 lg:max-w-4xl lg:gap-x-8 xl:max-w-none">
+          <li class="flex flex-col gap-6 xl:flex-row">
+            <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="/chandak.jpeg" alt="chandak image">
+            <div class="flex-auto">
+              <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Dr. Giriraj Ratan Chandak</h3>
+              <p class="text-base/7 text-gray-600">Founder & CEO</p>
+              <p class="mt-6 text-base/7 text-gray-600">A renowned physician-scientist, has made significant contributions to genetic research, molecular diagnostics, and sickle cell anaemia eradication. He founded Lightening Lives LLP to develop affordable diagnostic tools, improving global healthcare accessibility.</p>
+            </div>
+          </li>
+          <li class="flex flex-col gap-6 xl:flex-row">
+            <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="/nidhi.jpeg" alt="Nidhi image">
+            <div class="flex-auto">
+              <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Nidhi</h3>
+              <p class="text-base/7 text-gray-600">Co-Founder</p>
+              <p class="mt-6 text-base/7 text-gray-600">Co-Founder of Lightening Lives LLP, leverages her expertise in operations research and data management to optimize affordable diagnostic services for underserved communities, focusing on musculopathies and hemoglobinopathies.</p>
+            </div>
+          </li>
+          <li class="flex flex-col gap-6 xl:flex-row">
+            <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="https://images.pexels.com/photos/327540/pexels-photo-327540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Manisha image">
+            <div class="flex-auto">
+              <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Manisha Arumalla</h3>
+              <p class="text-base/7 text-gray-600">Scientific Officer</p>
+              <p class="mt-6 text-base/7 text-gray-600">A molecular and cell biologist with expertise in human genetics, protein engineering, and genomic research, plays a key role at Lightening Lives LLP, driving innovations in diagnostics and healthcare accessibility.</p>
+            </div>
+          </li>
+          <li class="flex flex-col gap-6 xl:flex-row">
+            <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Punyasri image">
+            <div class="flex-auto">
+              <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Punyasri SKDB</h3>
+              <p class="text-base/7 text-gray-600">Technical Officer</p>
+              <p class="mt-6 text-base/7 text-gray-600">A skilled scientist at Lightning Lives LLP, leverages her expertise in microbiology, genetics, and nutrition to ensure precise and reliable diagnostic processes. With over seven years of experience, she excels in conducting experiments, troubleshooting, and maintaining scientific excellence.</p>
+            </div>
+          </li>
+          <li class="flex flex-col gap-6 xl:flex-row">
+            <img class="aspect-4/5 w-52 flex-none rounded-2xl object-cover" src="https://images.pexels.com/photos/1181695/pexels-photo-1181695.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Mehraj image">
+            <div class="flex-auto">
+              <h3 class="text-lg/8 font-semibold tracking-tight text-gray-900">Mehraj Begum</h3>
+              <p class="text-base/7 text-gray-600">Operations Executive</p>
+              <p class="mt-6 text-base/7 text-gray-600">She efficiently manages administrative operations, overseeing resources, stakeholder meetings, and social media. With a background in biotechnology, she ensures seamless coordination, contributing to the company's growth and success.</p>
+            </div>
+          </li>                                
+        </ul>
+      </div>
+    </div>
+    <!-- Contact -->
+    <div class="bg-white" id="contact">
+      <div class="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">Contact Us</h2>
+          <p class="mx-auto mt-6 max-w-xl text-2xl/8 text-pretty text-gray-900 font-medium">
+            Lightening Lives LLP 
+          </p>
+          <address class="leading-relaxed mt-4 text-lg/8 text-gray-600">
+            Flat D 306, Sy No 117, Indu Aranya Pallavi Apts, GSI SR,<br>
+            Bandlaguda, Hayathnagar, Ranga Reddy,<br>
+            Hyderabad - 500068, Telangana, India.<br>
+            <span class="flex flex-row items-center justify-center gap-x-4">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+              <a href="tel:+919182588191">+91 91825 88191</a><br>
+            </span>
+            <span class="flex flex-row items-center justify-center gap-x-4">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+              <a href="mailto:admin@lighteninglives.in">admin@lighteninglives.in</a> 
+            </span> 
+            <span class="flex flex-row items-center justify-center gap-x-4">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+              <a href="mailto:chandakgrc@lighteninglives.in">chandakgrc@lighteninglives.in</a> 
+            </span>
+          </address>        
+        </div>
+      </div>
+    </div>    
+  </div>
 </body>
-
 </html>
